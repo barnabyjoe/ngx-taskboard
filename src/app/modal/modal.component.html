@@ -1,0 +1,62 @@
+<div class="modal" [ngClass]="{'is-active': isActive}">
+  <div class="modal-background" (click)="KickOffBackground()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <div class="field modal-card-title">
+        <div class="control">
+          <input class="input" [(ngModel)]="modalTitle" type="text" placeholder="Title input">
+        </div>
+      </div>
+      <button class="delete" aria-label="close" (click)="KickOffBackground()"></button>
+    </header>
+    <div class="modal-card-body" *ngIf="!isCard; else CardTemplate">
+      <textarea class="textarea" [(ngModel)]="modalBody" value="{{modalBody}}"></textarea>
+      <div class="select is-pulled-right">
+        <select [(ngModel)]="modalStatus" value="{{modalStatus}}">
+          <option>done</option>
+          <option>canceled</option>
+          <option>active</option>
+        </select>
+      </div>
+      <div *ngIf="modalImg.length != 0; else NoIMGTemplate">
+        <a class="delete is-medium" (click)="DeletePicture()"></a>
+        <figure class="image is-128x128">
+          <img src="{{modalImg}}">
+        </figure>
+      </div>
+      <ng-template #NoIMGTemplate>
+        <div class="field">
+          <div class="file is-small has-name">
+            <label class="file-label">
+              <input class="file-input" type="file" (change)="FileUpload()" name="resume">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fa fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Small file…
+                </span>
+              </span>
+              <span class="file-name">
+                {{modalImg}}
+              </span>
+            </label>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <ng-template #CardTemplate>
+      <div class="modal-card-body">
+        <h5>Select topper color</h5>
+        <span class="bd-color" [class.obselete]="modalColor == 'hsl(171, 100%, 41%)'" style="background: hsl(171, 100%, 41%)" (click)="AddColor('hsl(171, 100%, 41%)')"></span>
+        <span class="bd-color"[class.obselete]="modalColor == 'hsl(141, 71%, 48%)'" style="background: hsl(141, 71%, 48%)"(click)="AddColor('hsl(141, 71%, 48%)')"></span>
+        <span class="bd-color"[class.obselete]="modalColor == 'hsl(48, 100%, 67%)'" style="background: hsl(48, 100%, 67%)"(click)="AddColor('hsl(48, 100%, 67%)')"></span>
+        <span class="bd-color"[class.obselete]="modalColor == 'hsl(348, 100%, 61%)'" style="background: hsl(348, 100%, 61%)"(click)="AddColor('hsl(348, 100%, 61%)')"></span>
+      </div>   
+    </ng-template>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="MaintainModal()">Save changes</button>
+      <button class="button" (click)="KickOffBackground()">Cancel</button>
+    </footer>
+  </div>
+</div>

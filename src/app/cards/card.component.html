@@ -1,0 +1,54 @@
+<div class="hero-body">
+  <p class="title">
+    Tasker
+  </p>
+  <a class="button is-success is-inverted is-outlined is-pulled-right" (click)="BuildCard()">Add Card</a>
+  <p class="subtitle">
+    Everything you need to <strong>track a task</strong>
+  </p>
+  <hr class="navbar-divider">
+  <div class='wrapper container is-fluid'>
+    <div class="columns is-multiline" [dragula]='"first-bag"'>
+      <div class="column is-one-quarter" *ngFor="let card of cards">
+        <div class="handle" [ngStyle]="{'background': card.color}" data-tooltip="pull this card"></div>
+        <div class="box">
+          <article class="media">
+            <div class="media-content">
+              <a class="level-item is-pulled-right">
+                <span class="icon is-small" data-tooltip="delete card" (click)="DeleteCard(card)"><i class="fa fa-trash"></i></span>
+              </a>
+              <h3><strong class="title_card" (click)="EditCard(card)">{{card.title}}</strong></h3>
+              <a class="level-item" style="margin-bottom:15px">
+                <span class="icon is-small" data-tooltip="Add new note"  (click)="BuildNote(card)"><i class="fa fa-plus"></i></span>
+              </a>
+              <div *ngFor="let note of notes">
+                <div *ngIf="noteFill(card.body,note)" class="content notebox" (click)="EditNote(card,note)">
+                  <h5><strong>{{note.title}}</strong></h5>
+                  <img *ngIf="note.image != 0;" src="{{note.image}}">
+                  <p>
+                    <br> {{note.body}}
+                  </p>
+                  <hr class="navbar-divider">
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                      <a class="level-item">
+                        <span class="icon is-small" [class.obselete]="note.status == 'done'" data-tooltip="done"><i class="fa fa-reply"></i></span>
+                      </a>
+                      <a class="level-item">
+                        <span class="icon is-small" [class.obselete]="note.status == 'active'" data-tooltip="active"><i class="fa fa-retweet"></i></span>
+                      </a>
+                      <a class="level-item">
+                        <span class="icon is-small" [class.obselete]="note.status == 'canceled'" data-tooltip="canceled"><i class="fa fa-ban"></i></span>
+                      </a>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </article>          
+        </div>
+      </div>
+      <note-modal></note-modal>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <a class="navbar-item">
+      <img [src]="LOGO" alt="task dashboard">
+    </a>
+  <div class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link">
+      <h1>
+        {{title}}
+      </h1>
+    </a>
+    <div class="navbar-dropdown">
+      <a routerLink="/" routerLinkActive="active" class="navbar-item">
+          Overview All
+        </a>
+      <a routerLink="/done" routerLinkActive="active" class="navbar-item">
+          Is Done
+        </a>
+      <a routerLink="/active" routerLinkActive="active" class="navbar-item">
+          In Progress
+        </a>
+      <hr class="navbar-divider">
+      <a routerLink="/canceled" routerLinkActive="active" class="navbar-item">
+        Canceled
+      </a>
+    </div>
+  </div>
+</nav>
+<section class="hero is-info">
+  <router-outlet></router-outlet>
+</section>
+<div>
